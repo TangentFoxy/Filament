@@ -10,8 +10,8 @@ of arguments containing at a minimum, `input` and `output` channels, and `fn`
 (which is itself as a FileData object).
 
 ```
-local filament = require "filament"
-local thread = filament(function(args) args.output:push("A threaded hi!") end)
+local Filament = require "filament"
+local thread = Filament(function(args) args.output:push("A threaded hi!") end)
 thread\start!
 print(thread\demand!) -- waits for a message to be pushed, and grabs it
 ```
@@ -26,5 +26,5 @@ specify modules to be loaded:
 - `input`: A channel to be used to input data to the thread.
 - `output`: A channel the thread will use to output data.
 
-And finally, to have a thread run immediately, you can call `filament.run()`
+And finally, to have a thread run immediately, you can call `Filament.run()`
 instead of creating a filament object and calling `start` on it.
