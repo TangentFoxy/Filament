@@ -14,12 +14,12 @@ fn = filesystem.newFileData string.dump(fn), "filament.thread"
 next_id = 0
 
 class Filament
-  run: (...) ->
+  @run: (...) ->
     filament = Filament(...)
     filament\start!
     return filament
 
-  id: ->
+  @id: ->
     next_id += 1
     return next_id
 
@@ -34,8 +34,8 @@ class Filament
       when "function"
         opts.fn = filesystem.newFileData string.dump(opts.fn), "filament.fn"
 
-    opts.input = thread.getChannel(@id!) unless opts.input
-    opts.output = thread.getChannel(@id!) unless opts.output
+    opts.input = thread.getChannel(@@id!) unless opts.input
+    opts.output = thread.getChannel(@@id!) unless opts.output
 
     @opts = opts
     @input = opts.input

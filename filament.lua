@@ -20,15 +20,6 @@ local Filament
 do
   local _class_0
   local _base_0 = {
-    run = function(...)
-      local filament = Filament(...)
-      filament:start()
-      return filament
-    end,
-    id = function()
-      next_id = next_id + 1
-      return next_id
-    end,
     start = function(self)
       return self.thread:start(opts)
     end,
@@ -88,10 +79,10 @@ do
         opts.fn = filesystem.newFileData(string.dump(opts.fn), "filament.fn")
       end
       if not (opts.input) then
-        opts.input = thread.getChannel(self:id())
+        opts.input = thread.getChannel(self.__class:id())
       end
       if not (opts.output) then
-        opts.output = thread.getChannel(self:id())
+        opts.output = thread.getChannel(self.__class:id())
       end
       self.opts = opts
       self.input = opts.input
@@ -109,6 +100,16 @@ do
     end
   })
   _base_0.__class = _class_0
+  local self = _class_0
+  self.run = function(...)
+    local filament = Filament(...)
+    filament:start()
+    return filament
+  end
+  self.id = function()
+    next_id = next_id + 1
+    return next_id
+  end
   Filament = _class_0
   return _class_0
 end
