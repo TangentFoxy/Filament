@@ -43,7 +43,7 @@ class Filament
     @thread = thread.newThread fn
 
   start: =>
-    @thread\start opts
+    @thread\start(@opts)
 
   push: (...) =>
     if 1 < select "#", ...
